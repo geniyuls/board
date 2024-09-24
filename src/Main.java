@@ -44,8 +44,14 @@ public class Main {
     }
 }
 
-class Article{
+class Article {
     int id;
     String title;
     String body;
-        }
+
+    @Override // 어노테이션
+    public String toString() {
+        return String.format("{id : %d, title : \"%s\", body : \"%s\"}", id, title, body);
+    }
+
+}
