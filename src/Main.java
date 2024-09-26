@@ -1,18 +1,29 @@
+import java.net.SocketOption;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
+    static void makeTestData(List<Article> articles){
+        articles.add(new Article(1, "제목1", "내용1"));
+        articles.add(new Article(2, "제목2", "내용2"));
+        articles.add(new Article(3, "제목3", "내용3"));
+
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
 
         int articleLastId = 0;
         Article lastArticle = null;
         ArrayList<Article> articles = new ArrayList<Article>();
 
-        //테스트 게시물 작성 시작
-        articles.add(new Article(1, "제목2", "내용3"));
-        articles.add(new Article(2, "제목2", "내용3"));
-        articles.add(new Article(3, "제목2", "내용3"));
+        makeTestData(articles);
+
+        if(articles.size() > 0) {
+            articleLastId = articles.get(articles.size() - 1).id;
+        }
+
         System.out.println("== 텍스트 게시판 v 0.1==");
         System.out.println("프로그램 시작");
 
@@ -35,14 +46,14 @@ public class Main {
                 System.out.println("생성된 게시물 객체 : " + article);
 
                 System.out.printf("%d번 게시물이 생성되었습니다.\n", article.id);
-            } else if(cmd.equals("list")) {
+            } else if(cmd.equals("lists")) {
                 System.out.println("== 게시물 리스트 ==");
                 System.out.println("번호 | 제목");
 
-                for(Article article : articles) {
+                for(int i = articles.size() - 1; i >= 0; i--) {
+                    Article article = articles.get(i);
                     System.out.printf(" %d  | %s\n", article.id, article.title);
                 }
-//                articles.forEach(article -> System.out.printf(" %d  | %s\n", article.id, article.title));
             }
             else if (cmd.equals("content")) {
                 if (lastArticle == null) {
